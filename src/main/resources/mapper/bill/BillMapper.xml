@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.take_out.dao.BillDao">
+    <!--查询订单列表-->
+    <select id="findAll" resultType="Bill">
+        select
+        *
+        from bill
+    </select>
+
+    <!--查询一条订单-->
+    <select id="findOne" parameterType="int" resultType="Bill">
+        select
+        *
+        from bill where id=#{id}
+    </select>
+
+    <select id="findAllAttachRelateInfo" resultMap="billResultMap.getRelateInfo">
+        select
+        b.*, b.id as b_id,
+        u.*, u.id as u_id,
+        m.*, m.id as m_id
+        from bill b,user_openid u,merchant m
+        where b.user_openid_id=u.id and b.merchant_id=m.id
+    </select>
+    <select id="findOneAttachRelateInfo" resultMap="billResultMap.getRelateInfo">
+        select
+        b.*, b.id as b_id,
+        u.*, u.id as u_id,
+        m.*, m.id as m_id
+        from bill b,user_openid u,merchant m
+        where b.user_openid_id=u.id and b.merchant_id=m.id and b.id=#{id}
+    </select>
+    <!--创建一条订单-->
+    <insert id="insert" parameterType="Bill" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+         bill
+         (`number`, `price`, `discounts`, `is_pay`, `pay_time`, `user_openid_id`, `merchant_id`, `creation_time`, `modification_time`)
+         VALUES
+         (#{number}, #{price}, #{discounts}, #{isPay}, #{payTime}, #{userOpenidId}, #{merchantId}, #{creationTime}, #{modificationTime});
+    </insert>
+    <!--修改订单-->
+    <update id="modify" useGeneratedKeys="true" parameterType="Bill">
+        UPDATE
+        bill
+        <set>
+            <if test="number!=null and number!=''">`number`=#{number}, </if>
+            <if test="price!=null">`price`=#{price}, </if>
+            <if test="discounts!=null">`discounts`=#{discounts}, </if>
+            <if test="isPay!=null">`is_pay`=#{isPay}, </if>
+            <if test="payTime!=null">`pay_time`=#{payTime}, </if>
+            <if test="userOpenidId!=null">`user_openid_id`=#{userOpenidId}, </if>
+            <if test="merchantId!=null">`merchant_id`=#{merchantId}, </if>
+            <if test="modificationTime!=null">`modification_time`=#{modificationTime}, </if>
+        </set>
+        where id=#{id}
+    </update>
+    <!--删除订单-->
+    <delete id="delete" parameterType="int">
+        delete from bill where id=#{id}
+    </delete>
+</mapper>
