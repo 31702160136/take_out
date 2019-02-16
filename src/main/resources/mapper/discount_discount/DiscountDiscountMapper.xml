@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.take_out.dao.DiscountDiscountDao">
+
+    <!--查询所有所有优惠：折扣-->
+    <select id="findAll" resultType="DiscountDiscount">
+        select * from discount_discount
+    </select>
+
+    <!--根据MerchantId查询所有优惠：折扣-->
+    <select id="findDiscountDiscountByMerchantId" resultType="DiscountDiscount">
+        select * from discount_discount where merchant_id=#{id}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        `order`.`discount_discount`
+        (`name`, `condition`, `discount`, `merchant_id`, `creation_time`, `modification_time`)
+        VALUES
+        (#{name}, #{condition}, #{discount}, #{merchantId}, #{creationTime}, #{modificationTime});
+    </insert>
+
+    <update id="modify" useGeneratedKeys="true" keyProperty="id">
+        UPDATE `order`.`discount_discount`
+        SET
+        `name`=#{name}, `condition`=#{condition}, `discount`=#{discount},
+         `merchant_id`=#{merchantId}, `creation_time`=#{creationTime}, `modification_time`=#{modificationTime}
+         WHERE id=#{id};
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from discount_discount where id=#{id}
+    </delete>
+</mapper>

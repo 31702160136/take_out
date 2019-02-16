@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.take_out.dao.FlavorDao">
+
+    <!--查询所有食品口味-->
+    <select id="findAll" resultType="Flavor">
+        select * from flavor
+    </select>
+
+    <!--根据FoodId查询所有食品口味列表，一个食品存在与多个口味-->
+    <select id="findFlavorByFoodId" resultType="Flavor">
+        select * from flavor where food_id=#{foodId}
+    </select>
+
+    <!--插入信息-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `order`.`flavor`
+        (`name`, `food_id`, `creation_time`, `modification_time`)
+        VALUES
+        (#{name}, #{foodId}, #{creationTime}, #{modificationTime});
+    </insert>
+
+    <!--更新信息-->
+    <update id="modify" useGeneratedKeys="true" keyProperty="id">
+        UPDATE `order`.`flavor`
+        <set>
+            <if test="name!=null and name!=''">`name`=#{name},</if>
+            <if test="foodId!=null and foodId!=''">`food_id`=#{foodId},</if>
+            <if test="creationTime!=null">`creation_time`=#{creationTime},</if>
+            <if test="modificationTime!=null">`modification_time`=#{modificationTime},</if>
+        </set>
+        WHERE id=#{id};
+    </update>
+
+    <!--删除信息-->
+    <delete id="delete" parameterType="int">
+        delete from flavor where id=#{id}
+    </delete>
+</mapper>

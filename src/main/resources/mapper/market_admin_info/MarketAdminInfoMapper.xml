@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.take_out.dao.MarketAdminInfoDao">
+
+    <!--查询所有市场管理员信息-->
+    <select id="findAll" resultType="MarketAdminInfo">
+        select * from market_admin_info
+    </select>
+
+    <!--根据MarketId查询市场管理员信息-->
+    <select id="findMarketAdminInfoByMarketId" resultType="MarketAdminInfo">
+        select * from market_admin_info where marketId
+    </select>
+
+    <!--插入信息-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `order`.`market_admin_info`
+        (`name`, `gender`, `phone`,
+        `address`, `market_id`, `creation_time`, `modification_time`)
+        VALUES
+        (#{name}, #{gender}, #{phone}, #{address}, #{marketId}, #{creationTime}, #{modificationTime});
+    </insert>
+
+    <!--更新信息-->
+    <update id="modify" useGeneratedKeys="true" keyProperty="id">
+        UPDATE `order`.`market_admin_info`
+        SET
+        `name`=#{name}, `gender`=#{gender}, `phone`=#{phone},
+        `address`=#{address}, `market_id`=#{marketId},
+        `creation_time`=#{creationTime}, `modification_time`=#{modificationTime}
+        WHERE
+        id=#{id};
+    </update>
+
+    <!--删除信息-->
+    <delete id="delete" parameterType="int">
+        delete from market_admin_info where id=#{id}
+    </delete>
+</mapper>

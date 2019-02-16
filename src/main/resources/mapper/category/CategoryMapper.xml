@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.take_out.dao.CategoryDao">
+    <!--查询所有菜单分类-->
+    <select id="findAll" resultType="Category">
+        select * from category
+    </select>
+
+    <!--根据MerchantId查询所有菜单分类,一个商店存在多个菜单分类-->
+    <select id="findCategoryByMerchantId" resultType="Category">
+        select * from category where merchant_id=#{id}
+    </select>
+
+    <!--插入信息-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        `order`.`category` (`name`, `index`, `merchant_id`, `creation_time`, `modification_time`)
+        VALUES
+        (#{name}, #{index}, #{merchantId}, #{creationTime}, #{modificationTime});
+    </insert>
+
+    <!--更新信息-->
+    <update id="modify" useGeneratedKeys="true" keyProperty="id">
+        UPDATE `order`.`category`
+        SET
+        `name`=#{name}, `index`=#{index},`merchant_id`=#{merchantId},
+         `creation_time`=#{creationTime},`modification_time`=#{modificationTime}
+        WHERE
+        id=#{id};
+    </update>
+
+    <!--删除信息-->
+    <delete id="delete" parameterType="int">
+        delete from category where id=#{id}
+    </delete>
+</mapper>

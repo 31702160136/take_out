@@ -5,16 +5,27 @@
 <mapper namespace="com.order.take_out.dao.BillDao">
     <!--查询订单列表-->
     <select id="findAll" resultType="Bill">
-        select
-        *
-        from bill
+        select * from bill
+    </select>
+
+    <!--根据userOpenidId查询订单列表-->
+    <select id="findAllBillByOpenidId" resultType="Bill">
+        select * from bill where user_openid_id=#{id}
+    </select>
+
+    <!--根据merchantId查询订单列表-->
+    <select id="findAllBillByMerchantId" resultType="Bill">
+        select * from bill where merchant_id=#{id}
     </select>
 
     <!--查询一条订单-->
     <select id="findOne" parameterType="int" resultType="Bill">
-        select
-        *
-        from bill where id=#{id}
+        select * from bill where id=#{id}
+    </select>
+
+    <!--根据number查询订单列表-->
+    <select id="findBillByBillNunber" resultType="Bill">
+        select * from bill where number=#{number}
     </select>
 
     <select id="findAllAttachRelateInfo" resultMap="billResultMap.getRelateInfo">
@@ -25,6 +36,7 @@
         from bill b,user_openid u,merchant m
         where b.user_openid_id=u.id and b.merchant_id=m.id
     </select>
+
     <select id="findOneAttachRelateInfo" resultMap="billResultMap.getRelateInfo">
         select
         b.*, b.id as b_id,

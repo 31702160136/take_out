@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.take_out.dao.MarketDao">
+
+    <!--查询所有市场-->
+    <select id="findAll" resultType="Market">
+        select * from market
+    </select>
+
+    <!--查询市场-->
+    <select id="findOne" resultType="Market">
+        select * from market where id=#{id}
+    </select>
+
+    <!--根据Name查询所有市场-->
+    <select id="findAllByName" resultType="Market">
+        select * from market where name like CONCAT('%',name,'%')
+    </select>
+
+    <!--插入信息-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `order`.`market`
+        (`name`, `address`, `is_activate`, `creation_time`, `modification_time`)
+        VALUES
+        (#{name}, #{address}, #{isActivate}, #{creationTime}, #{modificationTime});
+    </insert>
+
+    <!--更新信息-->
+    <update id="modify" useGeneratedKeys="true" keyProperty="id">
+        UPDATE `order`.`market`
+        SET
+        `name`=#{name}, `address`=#{address}, #{isActivate},
+        `creation_time`=#{creationTime}, `modification_time`=#{modificationTime}
+        WHERE id=#{id};
+    </update>
+
+    <!--删除信息-->
+    <delete id="delete" parameterType="int">
+        delete from market where id=#{id}
+    </delete>
+</mapper>

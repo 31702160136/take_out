@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.take_out.dao.DetailedListDao">
+
+    <!--根据BillId查询订单菜品列表，一个订单存在多个菜品-->
+    <select id="findDetailedListByBillId" resultType="DetailedList">
+        select * from detailedlist where bill_id=#{id}
+    </select>
+
+    <!--插入信息-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        `order`.`detailedlist`
+        (`name`, `original_price`, `price`, `count`, `flavor`, `bill_id`, `creation_time`, `modification_time`)
+        VALUES
+        (#{name}, #{originalPrice}, #{price}, #{count}, #{flavor}, #{billId}, #{creationTime}, #{modificationTime});
+    </insert>
+
+    <!--更新信息-->
+    <update id="modify" useGeneratedKeys="true" keyProperty="id">
+        UPDATE `order`.`detailedlist`
+        SET
+        `name`=#{name}, `original_price`=#{originalPrice},
+        `price`=#{price}, `count`=#{count}, `flavor`=#{flavor},
+        `bill_id`=#{billId}, `creation_time`=#{creationTime}, `modification_time`=#{modificationTime}
+        WHERE id=#{id};
+    </update>
+
+    <!--删除信息-->
+    <delete id="delete" parameterType="int">
+        delete from detailedlist where id=#{id}
+    </delete>
+</mapper>
