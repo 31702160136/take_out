@@ -19,6 +19,13 @@ public interface MarketUserDao {
     public MarketUser findMarketUserByMarketId(int id);
 
     /**
+     * 根据UserName查询市场管理账号
+     * @param username
+     * @return
+     */
+    public MarketUser findMarketUserByUserName(String username);
+
+    /**
      * 插入信息
      * @param marketUser
      * @return
