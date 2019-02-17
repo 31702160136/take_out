@@ -16,7 +16,7 @@ public class ServiceInfo {
 //    市场最新续费日期
     private Date startingTime;
 //    市场使用过期时间
-    private Date end_time;
+    private Date endTime;
 //    续费信息对应的市场
     private Integer marketId;
     //    创建时间
@@ -48,12 +48,12 @@ public class ServiceInfo {
         this.startingTime = startingTime;
     }
 
-    public Date getEnd_time() {
-        return end_time;
+    public Date getEndTime() {
+        return endTime;
     }
 
-    public void setEnd_time(Date end_time) {
-        this.end_time = end_time;
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 
     public Integer getMarketId() {
@@ -86,7 +86,7 @@ public class ServiceInfo {
                 "id=" + id +
                 ", numOfRenewal=" + numOfRenewal +
                 ", startingTime=" + startingTime +
-                ", end_time=" + end_time +
+                ", end_time=" + endTime +
                 ", marketId=" + marketId +
                 ", creationTime=" + creationTime +
                 ", modificationTime=" + modificationTime +

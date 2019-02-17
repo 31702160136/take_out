@@ -3,7 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.order.take_out.dao.DetailedListDao">
-
     <!--根据BillId查询订单菜品列表，一个订单存在多个菜品-->
     <select id="findDetailedListByBillId" resultType="DetailedList">
         select * from detailedlist where bill_id=#{id}

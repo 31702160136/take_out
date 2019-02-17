@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.take_out.dao.UserOpenidDao">
+    <!--查询所有顾客-->
+    <select id="findAll" resultType="UserOpenid">
+        select * from user_openid
+    </select>
+
+    <!--查询顾客-->
+    <select id="findOne" resultType="UserOpenid">
+        select * from user_openid where id=#{id}
+    </select>
+
+    <!--根据openid查询顾客-->
+    <select id="findOneByOpenId" resultType="UserOpenid">
+        select * from user_openid where openid=#{openid}
+    </select>
+
+    <!--插入信息-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `order`.`user_openid`
+        (`openid`, `creation_time`, `modification_time`)
+        VALUES
+        (#{openid}, #{creationTime}, #{modificationTime});
+    </insert>
+
+    <!--更新信息-->
+    <update id="modify" useGeneratedKeys="true" keyProperty="id">
+        UPDATE `order`.`user_openid`
+        SET
+        `openid`=#{openid}, `creation_time`=#{creationTime},
+        `modification_time`=#{modificationTime}
+        WHERE id=#{id};
+    </update>
+
+    <!--删除信息-->
+    <delete id="delete" parameterType="int">
+        delete from user_openid where id=#{id}
+    </delete>
+</mapper>

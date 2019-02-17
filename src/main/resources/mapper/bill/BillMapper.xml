@@ -28,6 +28,7 @@
         select * from bill where number=#{number}
     </select>
 
+    <!--查询订单列表,附带关联信息-->
     <select id="findAllAttachRelateInfo" resultMap="billResultMap.getRelateInfo">
         select
         b.*, b.id as b_id,
@@ -37,6 +38,7 @@
         where b.user_openid_id=u.id and b.merchant_id=m.id
     </select>
 
+    <!--查询一条订单信息,附带关联信息-->
     <select id="findOneAttachRelateInfo" resultMap="billResultMap.getRelateInfo">
         select
         b.*, b.id as b_id,

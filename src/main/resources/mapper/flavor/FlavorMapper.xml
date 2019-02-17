@@ -3,7 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.order.take_out.dao.FlavorDao">
-
     <!--查询所有食品口味-->
     <select id="findAll" resultType="Flavor">
         select * from flavor

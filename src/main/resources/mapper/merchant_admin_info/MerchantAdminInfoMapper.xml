@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.take_out.dao.MerchantAdminInfoDao">
+
+    <select id="findAll" resultType="MerchantAdminInfo">
+        select * from merchant_admin_info
+    </select>
+
+    <select id="findMerchantAdminInfoByMerchantId" resultType="MerchantAdminInfo">
+        select * from merchant_admin_info where merchant_id=#{merchantId}
+    </select>
+
+    <!--插入信息-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `order`.`merchant_admin_info`
+        (`name`, `gender`, `phone`, `address`, `merchant_id`, `creation_time`, `modification_time`)
+        VALUES
+        (#{name}, #{gender}, #{phone}, #{address}, #{marketId}, #{creationTime}, #{modificationTime});
+    </insert>
+
+    <!--更新信息-->
+    <update id="modify" useGeneratedKeys="true" keyProperty="id">
+        UPDATE `order`.`merchant_admin_info`
+        SET
+        `name`=#{gender}, `gender`=#{gender},
+        `phone`=#{phone}, `address`=#{address}, `merchant_id`=#{marketId},
+         `creation_time`=#{creationTime}, `modification_time`=#{modificationTime}
+         WHERE id=#{id};
+    </update>
+
+    <!--删除信息-->
+    <delete id="delete" parameterType="int">
+        delete from merchant_admin_info where id=#{id}
+    </delete>
+</mapper>

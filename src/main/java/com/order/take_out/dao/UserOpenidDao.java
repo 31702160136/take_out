@@ -18,6 +18,12 @@ public interface UserOpenidDao {
     public UserOpenid findOne(int id);
 
     /**
+     * 根据openid查询顾客
+     * @return
+     */
+    public UserOpenid findOneByOpenId(String openid);
+
+    /**
      * 插入信息
      * @param userOpenid
      * @return

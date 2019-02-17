@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.take_out.dao.ServiceInfoDao">
+    <!--查询所有市场续费信息-->
+    <select id="findAll" resultType="ServiceInfo">
+        select * from service_info
+    </select>
+
+    <!--根据MarketId查询市场续费信息-->
+    <select id="findServiceInfoByMarketId" resultType="ServiceInfo">
+        select * from service_info where market_id=#{marketId}
+    </select>
+
+    <!--插入信息-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `order`.`service_info`
+        (`num_of_renewal`, `starting_time`, `end_time`, `market_id`, `creation_time`, `modification_time`)
+        VALUES
+        (numOfRenewal, startingTime, endTime, marketId, creationTime, modificationTime);
+    </insert>
+
+    <!--更新信息-->
+    <update id="modify" useGeneratedKeys="true" keyProperty="id">
+        UPDATE `order`.`service_info`
+        SET
+        `num_of_renewal`=numOfRenewal, `starting_time`=startingTime,
+        `end_time`=endTime, `market_id`=marketId, `creation_time`=creationTime, `modification_time`=modificationTime
+        WHERE id=#{id};
+    </update>
+
+    <!--删除信息-->
+    <delete id="delete" parameterType="int">
+        delete from service_info where id=#{id}
+    </delete>
+</mapper>
