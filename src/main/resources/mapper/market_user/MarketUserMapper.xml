@@ -29,9 +29,12 @@
     <!--更新信息-->
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
         UPDATE `order`.`market_user`
-        SET
-        `username`=#{username}, `market_id`=#{marketId},
-        `creation_time`=#{creationTime}, `modification_time`=#{modificationTime}
+        <set>
+            <if test="username!=null and username!=''">`username`=#{username}, </if>
+            <if test="marketId!=null">`market_id`=#{marketId}, </if>
+            <if test="creationTime!=null">`creation_time`=#{creationTime}, </if>
+            <if test="modificationTime!=null">`modification_time`=#{modificationTime} </if>
+        </set>
         WHERE id=#{id};
     </update>
 

@@ -1,8 +1,7 @@
-package com.order.take_out.service.bill.Impl;
+package com.order.take_out.service.Impl;
 
-import com.order.take_out.dao.BillDao;
 import com.order.take_out.pojo.bill.Bill;
-import com.order.take_out.service.bill.BillService;
+import com.order.take_out.service.BillService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class BillServiceImplTest {
@@ -36,7 +34,7 @@ public class BillServiceImplTest {
     @Test
     public void getBillListAttachRelateInfo() {
         List<Bill> list=new ArrayList<Bill>();
-        list=billService.getBillListAttachRelateInfo();
+        list=billService.getBillListAttachRelateInfoList();
         System.out.println(list);
     }
 
@@ -75,5 +73,19 @@ public class BillServiceImplTest {
     public void deleteBill() {
         boolean bool=billService.deleteBill(3);
         System.out.println(bool);
+    }
+
+    @Test
+    public void getAllBillByOpenidId() {
+        List<Bill> list=new ArrayList<Bill>();
+        list=billService.getAllBillByOpenidIdList(1);
+        System.out.println(list);
+    }
+
+    @Test
+    public void getAllBillByMerchantId() {
+        List<Bill> list=new ArrayList<Bill>();
+        list=billService.getAllBillByMerchantIdList(1);
+        System.out.println(list);
     }
 }

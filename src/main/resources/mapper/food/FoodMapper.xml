@@ -25,11 +25,16 @@
     <!--更新信息-->
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
         UPDATE `order`.`food`
-        SET
-        `name`=#{name}, `description`=#{description},
-        `original_price`=#{originalPrice}, `price`=#{price},
-         `sales_volume`=#{salesVolume}, `category_id`=#{categoryId},
-         `creation_time`=#{creationTime}, `modification_time`=#{modificationTime}
+        <set>
+            <if test="name!=null and name!=''">`name`=#{name}, </if>
+            <if test="description!=null and description!=''">`description`=#{description}, </if>
+            <if test="originalPrice!=null">`original_price`=#{originalPrice}, </if>
+            <if test="price!=null">`price`=#{price}, </if>
+            <if test="salesVolume!=null">`sales_volume`=#{salesVolume}, </if>
+            <if test="categoryId!=null">`category_id`=#{categoryId}, </if>
+            <if test="creationTime!=null">`creation_time`=#{creationTime}, </if>
+            <if test="modificationTime!=null">`modification_time`=#{modificationTime} </if>
+        </set>
         WHERE id=#{id};
     </update>
 

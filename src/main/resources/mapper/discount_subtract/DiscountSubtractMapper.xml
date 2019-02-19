@@ -24,10 +24,14 @@
     <!--更新信息-->
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
         UPDATE `order`.`discount_subtract`
-        SET
-        `name`=#{name}, `condition`=#{condition},
-        `subtract`=#{subtract}, `merchant_id`=#{merchant_id},
-        `creation_time`=#{creation_time}, `modification_time`=#{modification_time}
+        <set>
+            <if test="name!=null and name!=''">`name`=#{name}, </if>
+            <if test="condition!=null">`condition`=#{condition}, </if>
+            <if test="subtract!=null">`subtract`=#{subtract}, </if>
+            <if test="merchantId!=null">`merchant_id`=#{merchantId}, </if>
+            <if test="creationTime!=null">`creation_time`=#{creationTime}, </if>
+            <if test="modificationTime!=null">`modification_time`=#{modificationTime} </if>
+        </set>
         WHERE
         id=#{id};
     </update>

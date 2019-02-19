@@ -28,10 +28,15 @@
 
     <!--更新信息-->
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
-        UPDATE `order`.`merchant` SET
-        `name`=#{name}, `address`=#{address},
-        `is_do_business`=#{isDoBusiness}, `market_id`=#{marketId},
-        `creation_time`=#{creationTime}, `modification_time`=#{modificationTime}
+        UPDATE `order`.`merchant`
+        <set>
+            <if test="name!=null and name!=''">`name`=#{name}, </if>
+            <if test="address!=null and address!=''">`address`=#{address}, </if>
+            <if test="isDoBusiness!=null">`is_do_business`=#{isDoBusiness}, </if>
+            <if test="marketId!=null">`market_id`=#{marketId}, </if>
+            <if test="creationTime!=null">`creation_time`=#{creationTime}, </if>
+            <if test="modificationTime!=null">`modification_time`=#{modificationTime} </if>
+        </set>
         WHERE id=#{id};
     </update>
 

@@ -20,10 +20,16 @@
     <!--更新信息-->
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
         UPDATE `order`.`detailedlist`
-        SET
-        `name`=#{name}, `original_price`=#{originalPrice},
-        `price`=#{price}, `count`=#{count}, `flavor`=#{flavor},
-        `bill_id`=#{billId}, `creation_time`=#{creationTime}, `modification_time`=#{modificationTime}
+        <set>
+            <if test="name!=null and name!=''">`name`=#{name}, </if>
+            <if test="originalPrice!=null">`original_price`=#{originalPrice}, </if>
+            <if test="price!=null">`price`=#{price}, </if>
+            <if test="count!=null">`count`=#{count}, </if>
+            <if test="flavor!=null">`flavor`=#{flavor}, </if>
+            <if test="billId!=null">`bill_id`=#{billId}, </if>
+            <if test="creationTime!=null">`creation_time`=#{creationTime}, </if>
+            <if test="modificationTime!=null">`modification_time`=#{modificationTime}</if>
+        </set>
         WHERE id=#{id};
     </update>
 

@@ -25,10 +25,15 @@
     <!--更新信息-->
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
         UPDATE `order`.`market_admin_info`
-        SET
-        `name`=#{name}, `gender`=#{gender}, `phone`=#{phone},
-        `address`=#{address}, `market_id`=#{marketId},
-        `creation_time`=#{creationTime}, `modification_time`=#{modificationTime}
+        <set>
+            <if test="name!=null and name!=''">`name`=#{name}, </if>
+            <if test="gender!=null">`gender`=#{gender}, </if>
+            <if test="phone!=null and phone!=''">`phone`=#{phone}, </if>
+            <if test="address!=null and address!=''">`address`=#{address}, </if>
+            <if test="marketId!=null">`market_id`=#{marketId}, </if>
+            <if test="creationTime!=null">`creation_time`=#{creationTime}, </if>
+            <if test="modificationTime!=null">`modification_time`=#{modificationTime}, </if>
+        </set>
         WHERE
         id=#{id};
     </update>

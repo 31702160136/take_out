@@ -29,9 +29,11 @@
     <!--更新信息-->
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
         UPDATE `order`.`user_openid`
-        SET
-        `openid`=#{openid}, `creation_time`=#{creationTime},
-        `modification_time`=#{modificationTime}
+        <set>
+            <if test="openid!=null and openid!=''">`openid`=#{openid}, </if>
+            <if test="creationTime!=null">`creation_time`=#{creationTime}, </if>
+            <if test="modificationTime!=null">`modification_time`=#{modificationTime} </if>
+        </set>
         WHERE id=#{id};
     </update>
 

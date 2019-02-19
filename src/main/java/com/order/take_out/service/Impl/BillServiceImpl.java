@@ -1,9 +1,9 @@
-package com.order.take_out.service.bill.Impl;
+package com.order.take_out.service.Impl;
 
 import com.order.take_out.component.RandomCoding;
 import com.order.take_out.dao.BillDao;
 import com.order.take_out.pojo.bill.Bill;
-import com.order.take_out.service.bill.BillService;
+import com.order.take_out.service.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,11 +46,45 @@ public class BillServiceImpl implements BillService {
     }
 
     /**
+     * 根据openid查询所有订单信息
+     * @param id openid
+     * @return
+     */
+    public List<Bill> getAllBillByOpenidIdList(Integer id){
+        if (id!=null){
+            try {
+                return billDao.findAllBillByOpenidId(id);
+            }catch (RuntimeException e){
+                throw new RuntimeException("查询用户订单失败!"+e.getMessage());
+            }
+        }else {
+            throw new RuntimeException("信息不齐全,请检查是否有漏写入必填信息!");
+        }
+    }
+
+    /**
+     * 根据merchantId查询所有订单信息
+     * @param id merchantId
+     * @return
+     */
+    public List<Bill> getAllBillByMerchantIdList(Integer id){
+        if (id!=null){
+            try {
+                return billDao.findAllBillByMerchantId(id);
+            }catch (RuntimeException e){
+                throw new RuntimeException("查询商店订单失败!"+e.getMessage());
+            }
+        }else {
+            throw new RuntimeException("信息不齐全,请检查是否有漏写入必填信息!");
+        }
+    }
+
+    /**
      * 查询订单列表，附加关联信息
      * @return
      */
     @Override
-    public List<Bill> getBillListAttachRelateInfo() {
+    public List<Bill> getBillListAttachRelateInfoList() {
         return billDao.findAllAttachRelateInfo();
     }
 
@@ -89,11 +123,11 @@ public class BillServiceImpl implements BillService {
             }
             try {
 //                创建订单
-                int newId=billDao.insert(bill);
-                if (newId>0){
+                int result=billDao.insert(bill);
+                if (result>0){
                     return true;
                 }else {
-                    throw new RuntimeException("创建订单失败!");
+                    throw new RuntimeException("创建订单失败!,result："+result);
                 }
             }catch (RuntimeException e){
                 throw new RuntimeException("创建订单失败!"+e.getMessage());

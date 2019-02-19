@@ -1,4 +1,4 @@
-package com.order.take_out.service.bill;
+package com.order.take_out.service;
 
 
 import com.order.take_out.pojo.bill.Bill;
@@ -21,10 +21,24 @@ public interface BillService {
     public Bill getBill(Integer id);
 
     /**
+     * 根据openid查询所有订单信息
+     * @param id openid
+     * @return
+     */
+    public List<Bill> getAllBillByOpenidIdList(Integer id);
+
+    /**
+     * 根据merchantId查询所有订单信息
+     * @param id merchantId
+     * @return
+     */
+    public List<Bill> getAllBillByMerchantIdList(Integer id);
+
+    /**
      * 获取订单列表,附加关联信息
      * @return
      */
-    public List<Bill> getBillListAttachRelateInfo();
+    public List<Bill> getBillListAttachRelateInfoList();
 
     /**
      * 获取一条订单,附加关联信息

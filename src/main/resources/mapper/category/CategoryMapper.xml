@@ -24,9 +24,13 @@
     <!--更新信息-->
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
         UPDATE `order`.`category`
-        SET
-        `name`=#{name}, `index`=#{index},`merchant_id`=#{merchantId},
-         `creation_time`=#{creationTime},`modification_time`=#{modificationTime}
+        <set>
+            <if test="name!=null and name!=''">`name`=#{name}, </if>
+            <if test="index!=null">`index`=#{index}, </if>
+            <if test="merchantId!=null">`merchant_id`=#{merchantId}, </if>
+            <if test="creationTime!=null">`creation_time`=#{creationTime}, </if>
+            <if test="modificationTime!=null">`modification_time`=#{modificationTime}, </if>
+        </set>
         WHERE
         id=#{id};
     </update>

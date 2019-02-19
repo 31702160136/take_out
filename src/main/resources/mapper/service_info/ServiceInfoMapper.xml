@@ -24,9 +24,14 @@
     <!--更新信息-->
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
         UPDATE `order`.`service_info`
-        SET
-        `num_of_renewal`=numOfRenewal, `starting_time`=startingTime,
-        `end_time`=endTime, `market_id`=marketId, `creation_time`=creationTime, `modification_time`=modificationTime
+        <set>
+            <if test="numOfRenewal!=null">`num_of_renewal`=numOfRenewal, </if>
+            <if test="startingTime!=null">`starting_time`=startingTime,</if>
+            <if test="endTime!=null">`end_time`=endTime, </if>
+            <if test="marketId!=null">`market_id`=marketId, </if>
+            <if test="creationTime!=null">`creation_time`=creationTime, </if>
+            <if test="modificationTime!=null">`modification_time`=modificationTime, </if>
+        </set>
         WHERE id=#{id};
     </update>
 

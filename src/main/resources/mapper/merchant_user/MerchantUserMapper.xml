@@ -10,12 +10,12 @@
     </select>
 
     <!--根据MerchantId查询店铺账号-->
-    <select id="findMarketUserByMarketId" resultType="MerchantUser">
+    <select id="findMerchantByMarketId" resultType="MerchantUser">
         select * from merchant_user where merchant_id=#{merchantId}
     </select>
 
     <!--根据UserName查询店铺账号-->
-    <select id="findMarketUserByUserName" resultType="MerchantUser">
+    <select id="findMerchantByName" resultType="MerchantUser">
         select * from merchant_user where username=#{username}
     </select>
 
@@ -30,9 +30,12 @@
     <!--更新信息-->
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
         UPDATE `order`.`merchant_user`
-        SET
-        `username`=#{username}, `merchant_id`=#{merchantId},
-        `creation_time`=#{creationTime}, `modification_time`=#{modificationTime}
+        <set>
+            <if test="username!=null and username!=''">`username`=#{username}, </if>
+            <if test="merchantId!=null">`merchant_id`=#{merchantId}, </if>
+            <if test="creationTime!=null">`creation_time`=#{creationTime}, </if>
+            <if test="modificationTime!=null">`modification_time`=#{modificationTime} </if>
+        </set>
         WHERE id=#{id};
     </update>
 

@@ -23,9 +23,14 @@
 
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
         UPDATE `order`.`discount_discount`
-        SET
-        `name`=#{name}, `condition`=#{condition}, `discount`=#{discount},
-         `merchant_id`=#{merchantId}, `creation_time`=#{creationTime}, `modification_time`=#{modificationTime}
+        <set>
+            <if test="name!=null and name!=''">`name`=#{name}, </if>
+            <if test="condition!=null">`condition`=#{condition}, </if>
+            <if test="discount!=null">`discount`=#{discount}, </if>
+            <if test="merchant_id!=null">`merchant_id`=#{merchantId}, </if>
+            <if test="creation_time!=null">`creation_time`=#{creationTime}, </if>
+            <if test="modification_time!=null">`modification_time`=#{modificationTime} </if>
+        </set>
          WHERE id=#{id};
     </update>
 

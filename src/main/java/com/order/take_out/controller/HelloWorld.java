@@ -1,5 +1,6 @@
 package com.order.take_out.controller;
 
+import com.order.take_out.component.Test;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
