@@ -14,7 +14,18 @@
         `order`.`detailedlist`
         (`name`, `original_price`, `price`, `count`, `flavor`, `bill_id`, `creation_time`, `modification_time`)
         VALUES
-        (#{name}, #{originalPrice}, #{price}, #{count}, #{flavor}, #{billId}, #{creationTime}, #{modificationTime});
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+              #{item.name},
+              #{item.originalPrice},
+              #{item.price},
+              #{item.count},
+              #{item.flavor},
+              #{item.billId},
+              #{item.creationTime},
+              #{item.modificationTime}
+            )
+        </foreach>
     </insert>
 
     <!--更新信息-->
