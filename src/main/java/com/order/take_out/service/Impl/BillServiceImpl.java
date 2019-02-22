@@ -1,6 +1,6 @@
 package com.order.take_out.service.Impl;
 
-import com.order.take_out.component.RandomCoding;
+import com.order.take_out.tools_homemade.RandomCoding;
 import com.order.take_out.dao.BillDao;
 import com.order.take_out.pojo.bill.Bill;
 import com.order.take_out.service.BillService;

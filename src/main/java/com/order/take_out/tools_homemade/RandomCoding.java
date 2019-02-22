@@ -1,7 +1,4 @@
-package com.order.take_out.component;
-
-import com.sun.tools.javac.util.Log;
-import org.apache.logging.log4j.Logger;
+package com.order.take_out.tools_homemade;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
