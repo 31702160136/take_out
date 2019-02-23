@@ -1,4 +1,4 @@
-package com.order.take_out.controller;
+package com.order.take_out.controller.client_side_market;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

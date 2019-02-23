@@ -3,6 +3,7 @@ package com.order.take_out;
 import com.order.take_out.tools_custom.CustomRealm;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.DefaultSecurityManager;
 import org.apache.shiro.subject.Subject;
 import org.junit.Test;
@@ -25,6 +26,14 @@ public class CustomRealmTest {
         //1.构建SecurityManager环境
         DefaultSecurityManager manager=new DefaultSecurityManager();
         manager.setRealm(customRealm);
+
+        //md5解密
+        HashedCredentialsMatcher matcher=new HashedCredentialsMatcher();
+        matcher.setHashAlgorithmName("md5");
+        matcher.setHashIterations(1);
+
+//        设置解密
+        customRealm.setCredentialsMatcher(matcher);
         //2.主体提交认证请求
         SecurityUtils.setSecurityManager(manager);
         Subject subject= SecurityUtils.getSubject();
