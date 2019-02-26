@@ -21,6 +21,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     private Map<String,Object> exceptionHandler(HttpServletRequest request,Exception e){
         Map<String,Object> map=new HashMap<String,Object>();
+        map.put("code",403);
         map.put("success",false);
         map.put("errMessage",e.getMessage());
         return map;
