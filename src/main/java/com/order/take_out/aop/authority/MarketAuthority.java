@@ -35,7 +35,7 @@ public class MarketAuthority {
         }
     }
 
-    @Around(value = "execution(* com.order.take_out.controller.client_side_market.SelectMarketController.*(..))")
+    @Around(value = "execution(* com.order.take_out.controller.client_side_market.Select*.*(..))")
     public Object isLogin(ProceedingJoinPoint jp){
         Subject subject= SecurityUtils.getSubject();
         if (subject.isAuthenticated()){
