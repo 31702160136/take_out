@@ -15,7 +15,7 @@
 
     <!--根据Name查询所有市场-->
     <select id="findAllByName" resultType="Market">
-        select * from market where name like CONCAT('%',name,'%')
+        select * from market where name like CONCAT('%',#{name},'%')
     </select>
 
     <!--插入信息-->

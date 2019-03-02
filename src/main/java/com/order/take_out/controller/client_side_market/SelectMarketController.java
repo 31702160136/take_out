@@ -23,10 +23,32 @@ public class SelectMarketController {
     @Autowired
     SelectMarketService selectMarketService;
 
-    @RequestMapping("/findMarketList")
+    @RequestMapping("/getMarketList")
     @ResponseBody
-    public Map<String,Object> findMarketList(){
+    public Map<String,Object> getMarketList(){
         List<Market> list=selectMarketService.getMarketList();
+        Map<String,Object> map=new LinkedHashMap<>();
+        map.put("success",true);
+        map.put("code",200);
+        map.put("data",list);
+        return map;
+    }
+
+    @RequestMapping("/getMarket")
+    @ResponseBody
+    public Map<String,Object> getMarket(Integer id) {
+        Market market=selectMarketService.getMarket(id);
+        Map<String,Object> map=new LinkedHashMap<>();
+        map.put("success",true);
+        map.put("code",200);
+        map.put("data",market);
+        return map;
+    }
+
+    @RequestMapping("/getMarketByName")
+    @ResponseBody
+    public Map<String,Object> getMarketByName(String name){
+        List<Market> list=selectMarketService.getMarketByName(name);
         Map<String,Object> map=new LinkedHashMap<>();
         map.put("success",true);
         map.put("code",200);
