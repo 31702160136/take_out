@@ -1,7 +1,7 @@
 package com.order.take_out.service.Impl;
 
 import com.order.take_out.pojo.market.Market;
-import com.order.take_out.service.SelectMarketService;
+import com.order.take_out.service.market.SelectMarketService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class SelectMarketServiceImplTest {

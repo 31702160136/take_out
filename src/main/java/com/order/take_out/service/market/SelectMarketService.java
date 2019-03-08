@@ -1,4 +1,4 @@
-package com.order.take_out.service;
+package com.order.take_out.service.market;
 
 import com.order.take_out.pojo.market.Market;
 import com.order.take_out.pojo.merchant.Merchant;

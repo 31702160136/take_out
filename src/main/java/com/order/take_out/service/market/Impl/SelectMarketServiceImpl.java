@@ -1,11 +1,12 @@
-package com.order.take_out.service.Impl;
+package com.order.take_out.service.market.Impl;
 
 import com.order.take_out.dao.MarketDao;
+import com.order.take_out.dao.MarketPasswordDao;
+import com.order.take_out.dao.MarketUserDao;
 import com.order.take_out.pojo.market.Market;
-import com.order.take_out.service.SelectMarketService;
+import com.order.take_out.service.market.SelectMarketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,10 @@ import java.util.List;
 public class SelectMarketServiceImpl implements SelectMarketService {
     @Autowired
     MarketDao marketDao;
+    @Autowired
+    MarketUserDao marketUserDao;
+    @Autowired
+    MarketPasswordDao marketPasswordDao;
 
     @Override
     public List<Market> getMarketList() {
@@ -58,4 +63,18 @@ public class SelectMarketServiceImpl implements SelectMarketService {
             throw new RuntimeException("信息不齐全,请检查是否有漏写入必填信息!");
         }
     }
+
+//    @Override
+//    public Market getMarketPassword(Integer id) {
+//        if (id!=null){
+//            try {
+//                //查询市场
+//                return marketDao.findOne(id);
+//            }catch (RuntimeException e){
+//                throw new RuntimeException("根据id查询市场失败"+e.getMessage());
+//            }
+//        }else {
+//            throw new RuntimeException("信息不齐全,请检查是否有漏写入必填信息!");
+//        }
+//    }
 }

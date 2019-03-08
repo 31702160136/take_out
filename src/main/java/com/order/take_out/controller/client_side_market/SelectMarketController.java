@@ -1,9 +1,8 @@
 package com.order.take_out.controller.client_side_market;
 
 import com.order.take_out.pojo.market.Market;
-import com.order.take_out.pojo.merchant.Merchant;
-import com.order.take_out.service.MarketService;
-import com.order.take_out.service.SelectMarketService;
+import com.order.take_out.service.market.SelectMarketService;
+import com.order.take_out.tools_homemade.JsonOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,32 +26,21 @@ public class SelectMarketController {
     @ResponseBody
     public Map<String,Object> getMarketList(){
         List<Market> list=selectMarketService.getMarketList();
-        Map<String,Object> map=new LinkedHashMap<>();
-        map.put("success",true);
-        map.put("code",200);
-        map.put("data",list);
-        return map;
+        return JsonOut.print(list);
     }
 
     @RequestMapping("/getMarket")
     @ResponseBody
     public Map<String,Object> getMarket(Integer id) {
         Market market=selectMarketService.getMarket(id);
-        Map<String,Object> map=new LinkedHashMap<>();
-        map.put("success",true);
-        map.put("code",200);
-        map.put("data",market);
-        return map;
+        System.out.println("ss");
+        return JsonOut.print(market);
     }
 
     @RequestMapping("/getMarketByName")
     @ResponseBody
     public Map<String,Object> getMarketByName(String name){
         List<Market> list=selectMarketService.getMarketByName(name);
-        Map<String,Object> map=new LinkedHashMap<>();
-        map.put("success",true);
-        map.put("code",200);
-        map.put("data",list);
-        return map;
+        return JsonOut.print(list);
     }
 }

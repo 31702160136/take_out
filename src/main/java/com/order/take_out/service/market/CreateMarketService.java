@@ -1,9 +1,6 @@
-package com.order.take_out.service;
+package com.order.take_out.service.market;
 
-import com.order.take_out.pojo.market.Market;
-
-public interface addMarketService {
-
+public interface CreateMarketService {
     /**
      * 创建店铺
      * @return

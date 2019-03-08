@@ -18,19 +18,19 @@
         INSERT INTO `order`.`service_info`
         (`num_of_renewal`, `starting_time`, `end_time`, `market_id`, `creation_time`, `modification_time`)
         VALUES
-        (numOfRenewal, startingTime, endTime, marketId, creationTime, modificationTime);
+        (#{numOfRenewal}, #{startingTime}, #{endTime}, #{marketId}, #{creationTime}, #{modificationTime});
     </insert>
 
     <!--更新信息-->
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
         UPDATE `order`.`service_info`
         <set>
-            <if test="numOfRenewal!=null">`num_of_renewal`=numOfRenewal, </if>
-            <if test="startingTime!=null">`starting_time`=startingTime,</if>
-            <if test="endTime!=null">`end_time`=endTime, </if>
-            <if test="marketId!=null">`market_id`=marketId, </if>
-            <if test="creationTime!=null">`creation_time`=creationTime, </if>
-            <if test="modificationTime!=null">`modification_time`=modificationTime, </if>
+            <if test="numOfRenewal!=null">`num_of_renewal`=#{numOfRenewal}, </if>
+            <if test="startingTime!=null">`starting_time`=#{startingTime},</if>
+            <if test="endTime!=null">`end_time`=#{endTime}, </if>
+            <if test="marketId!=null">`market_id`=#{marketId}, </if>
+            <if test="creationTime!=null">`creation_time`=#{creationTime}, </if>
+            <if test="modificationTime!=null">`modification_time`=#{modificationTime}, </if>
         </set>
         WHERE id=#{id};
     </update>
