@@ -26,6 +26,10 @@ public class addMarketController {
     @ResponseBody
     public Map<String, Object> createMarket(String username, String password){
         boolean result=marketService.createMarket(username,password);
-        return JsonOut.print("成功");
+        if (result){
+            return JsonOut.print("成功",JsonOut.TRUE);
+        }else {
+            return JsonOut.print("失败",JsonOut.FALSE);
+        }
     }
 }

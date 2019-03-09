@@ -54,21 +54,25 @@ public class CreateMarketServiceImpl implements CreateMarketService {
     }
 
     private int createUser(String username,Integer marketId) throws RuntimeException{
-        MarketUser reMarketUser=marketUserDao.findMarketUserByUserName(username);
-        if (reMarketUser==null){
-            MarketUser marketUser=new MarketUser();
-            marketUser.setUsername(username);
-            marketUser.setMarketId(marketId);
-            marketUser.setCreationTime(new Date());
-            marketUser.setModificationTime(new Date());
-            int result=marketUserDao.insert(marketUser);
-            if (result>0){
-                return marketUser.getId();
+        try {
+            MarketUser reMarketUser=marketUserDao.findMarketUserByUserName(username);
+            if (reMarketUser==null){
+                MarketUser marketUser=new MarketUser();
+                marketUser.setUsername(username);
+                marketUser.setMarketId(marketId);
+                marketUser.setCreationTime(new Date());
+                marketUser.setModificationTime(new Date());
+                int result=marketUserDao.insert(marketUser);
+                if (result>0){
+                    return marketUser.getId();
+                }else {
+                    throw new RuntimeException("创建市场账号错误");
+                }
             }else {
-                throw new RuntimeException("创建市场账号错误");
+                throw new RuntimeException("账号重复");
             }
-        }else {
-            throw new RuntimeException("账号重复");
+        }catch (RuntimeException e){
+            throw new RuntimeException("创建市场账号错误");
         }
 
     }

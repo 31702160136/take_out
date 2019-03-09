@@ -26,7 +26,7 @@ public class SelectMarketController {
     @ResponseBody
     public Map<String,Object> getMarketList(){
         List<Market> list=selectMarketService.getMarketList();
-        return JsonOut.print(list);
+        return JsonOut.print(list,JsonOut.TRUE);
     }
 
     @RequestMapping("/getMarket")
@@ -34,13 +34,13 @@ public class SelectMarketController {
     public Map<String,Object> getMarket(Integer id) {
         Market market=selectMarketService.getMarket(id);
         System.out.println("ss");
-        return JsonOut.print(market);
+        return JsonOut.print(market,JsonOut.TRUE);
     }
 
     @RequestMapping("/getMarketByName")
     @ResponseBody
     public Map<String,Object> getMarketByName(String name){
         List<Market> list=selectMarketService.getMarketByName(name);
-        return JsonOut.print(list);
+        return JsonOut.print(list,JsonOut.TRUE);
     }
 }

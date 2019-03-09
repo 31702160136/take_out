@@ -1,6 +1,7 @@
 package com.order.take_out.service.market;
 
 import com.order.take_out.pojo.market.Market;
+import com.order.take_out.pojo.market.MarketUser;
 import com.order.take_out.pojo.merchant.Merchant;
 
 import java.util.List;
@@ -25,4 +26,11 @@ public interface SelectMarketService {
      * @return
      */
     public List<Market> getMarketByName(String name);
+
+    /**
+     * 根据MarketId查询市场管理账号
+     * @param MarketId
+     * @return
+     */
+    public MarketUser getMarketUser(Integer MarketId);
 }

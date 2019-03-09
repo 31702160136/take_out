@@ -10,11 +10,22 @@ import java.util.Map;
  * @create: 2019-03-03 18:36
  **/
 public class JsonOut {
-    public static Map<String,Object> print(Object obj){
+    public static int TRUE=200;
+    public static int FALSE=403;
+    public static Map<String,Object> print(Object obj,int type){
         Map<String,Object> map=new LinkedHashMap<>();
-        map.put("success",true);
-        map.put("code",200);
-        map.put("data",obj);
+        switch (type){
+            case 200:
+                map.put("success",true);
+                map.put("code",TRUE);
+                map.put("data",obj);
+                break;
+            case 403:
+                map.put("success",true);
+                map.put("code",FALSE);
+                map.put("data",obj);
+                break;
+        }
         return map;
     }
 }

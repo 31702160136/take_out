@@ -4,6 +4,7 @@ import com.order.take_out.dao.MarketDao;
 import com.order.take_out.dao.MarketPasswordDao;
 import com.order.take_out.dao.MarketUserDao;
 import com.order.take_out.pojo.market.Market;
+import com.order.take_out.pojo.market.MarketUser;
 import com.order.take_out.service.market.SelectMarketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,25 @@ public class SelectMarketServiceImpl implements SelectMarketService {
                 return marketDao.findAllByName(name);
             }catch (RuntimeException e){
                 throw new RuntimeException("根据name查询市场列表失败"+e.getMessage());
+            }
+        }else {
+            throw new RuntimeException("信息不齐全,请检查是否有漏写入必填信息!");
+        }
+    }
+
+    @Override
+    public MarketUser getMarketUser(Integer marketId) {
+        if (marketId!=null){
+            try {
+                //查询市场
+                MarketUser marketUser=marketUserDao.findMarketUserByMarketId(marketId);
+                if (marketUser!=null){
+                    return marketUser;
+                }else {
+                    throw new RuntimeException("查询出现未知错误");
+                }
+            }catch (RuntimeException e){
+                throw new RuntimeException("根据marketId查询市场列表失败"+e.getMessage());
             }
         }else {
             throw new RuntimeException("信息不齐全,请检查是否有漏写入必填信息!");
