@@ -28,4 +28,20 @@ public class JsonOut {
         }
         return map;
     }
+    public static Map<String,Object> printLoginInfo(Object obj,int type){
+        Map<String,Object> map=new LinkedHashMap<>();
+        switch (type){
+            case 200:
+                map.put("success",true);
+                map.put("code",TRUE);
+                map.put("data",obj);
+                break;
+            case 403:
+                map.put("success",true);
+                map.put("code",FALSE);
+                map.put("data",obj);
+                break;
+        }
+        return map;
+    }
 }

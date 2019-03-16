@@ -1,10 +1,12 @@
-package com.order.take_out.controller.client_side_market;
+package com.order.take_out.controller_api.client_side_market;
 
 import com.order.take_out.pojo.client.UserOpenid;
+import com.order.take_out.service.market.SelectMarketService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -20,6 +22,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/market_login")
 public class LoginMarketController {
+    @Autowired
+    SelectMarketService selectMarketService;
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     @ResponseBody
@@ -34,10 +38,12 @@ public class LoginMarketController {
         Map<String,Object> map=new LinkedHashMap<>();
         if (subject.isAuthenticated()){
             map.put("code",200);
+            //map.put("data",);
         }else {
             map.put("code",403);
         }
         map.put("success",subject.isAuthenticated());
+
         return map;
     }
 }

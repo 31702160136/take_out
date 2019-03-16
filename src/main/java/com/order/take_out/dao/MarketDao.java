@@ -10,7 +10,7 @@ public interface MarketDao {
      * 查询所有市场
      * @return
      */
-    public List<Market> findAll();
+    public List<Market> findAll(int page,int pageSize);
 
     /**
      * 查询市场

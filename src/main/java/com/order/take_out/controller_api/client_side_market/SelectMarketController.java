@@ -1,4 +1,4 @@
-package com.order.take_out.controller.client_side_market;
+package com.order.take_out.controller_api.client_side_market;
 
 import com.order.take_out.pojo.market.Market;
 import com.order.take_out.service.market.SelectMarketService;
@@ -22,10 +22,10 @@ public class SelectMarketController {
     @Autowired
     SelectMarketService selectMarketService;
 
-    @RequestMapping("/getMarketList")
+    @RequestMapping("/getMarketLists")
     @ResponseBody
-    public Map<String,Object> getMarketList(){
-        List<Market> list=selectMarketService.getMarketList();
+    public Map<String,Object> getMarketList(Integer page,Integer pageSize){
+        List<Map<String,Object>> list=selectMarketService.getMarketList(page,pageSize);
         return JsonOut.print(list,JsonOut.TRUE);
     }
 
@@ -33,7 +33,6 @@ public class SelectMarketController {
     @ResponseBody
     public Map<String,Object> getMarket(Integer id) {
         Market market=selectMarketService.getMarket(id);
-        System.out.println("ss");
         return JsonOut.print(market,JsonOut.TRUE);
     }
 
@@ -43,4 +42,5 @@ public class SelectMarketController {
         List<Market> list=selectMarketService.getMarketByName(name);
         return JsonOut.print(list,JsonOut.TRUE);
     }
+
 }

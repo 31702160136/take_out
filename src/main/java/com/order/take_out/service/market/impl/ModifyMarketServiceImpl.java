@@ -1,4 +1,4 @@
-package com.order.take_out.service.market.Impl;
+package com.order.take_out.service.market.impl;
 
 import com.order.take_out.dao.MarketAdminInfoDao;
 import com.order.take_out.dao.MarketDao;

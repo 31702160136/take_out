@@ -1,8 +1,9 @@
-package com.order.take_out.controller.client_side_market;
+package com.order.take_out.controller_api.client_side_market;
 
 import com.order.take_out.service.market.CreateMarketService;
 import com.order.take_out.tools_homemade.JsonOut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,8 +25,8 @@ public class addMarketController {
 
     @RequestMapping("/createMarket")
     @ResponseBody
-    public Map<String, Object> createMarket(String username, String password){
-        boolean result=marketService.createMarket(username,password);
+    public Map<String, Object> createMarket(@RequestBody Map<String,Object> map){
+        boolean result=marketService.createMarket(map);
         if (result){
             return JsonOut.print("成功",JsonOut.TRUE);
         }else {

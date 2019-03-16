@@ -21,7 +21,7 @@ import java.util.Arrays;
 @Configuration
 public class MarketAuthority {
 
-    @AfterReturning(value = "execution(* com.order.take_out.controller.client_side_market.LoginMarketController.login(..))",returning = "returnValue")
+    @AfterReturning(value = "execution(* com.order.take_out.controller_api.client_side_market.LoginMarketController.login(..))",returning = "returnValue")
     public void loginInfo(JoinPoint jp,Object returnValue){
         Subject subject= SecurityUtils.getSubject();
         String str=Arrays.toString(jp.getArgs());
@@ -35,18 +35,18 @@ public class MarketAuthority {
         }
     }
 
-    @Around(value = "execution(* com.order.take_out.controller.client_side_market.Select*.*(..))")
-    public Object isLogin(ProceedingJoinPoint jp){
-        Subject subject= SecurityUtils.getSubject();
-        if (subject.isAuthenticated()){
-            try {
-                Object object=jp.proceed(jp.getArgs());
-                return object;
-            } catch (Throwable throwable) {
-                throw new RuntimeException("发生错误:"+throwable.getMessage());
-            }
-        }else {
-            throw new RuntimeException("未登录");
-        }
-    }
+//    @Around(value = "execution(* com.order.take_out.controller_api.client_side_market.Select*.*(..))")
+//    public Object isLogin(ProceedingJoinPoint jp){
+//        Subject subject= SecurityUtils.getSubject();
+//        if (subject.isAuthenticated()){
+//            try {
+//                Object object=jp.proceed(jp.getArgs());
+//                return object;
+//            } catch (Throwable throwable) {
+//                throw new RuntimeException("发生错误:"+throwable.getMessage());
+//            }
+//        }else {
+//            throw new RuntimeException("未登录");
+//        }
+//    }
 }

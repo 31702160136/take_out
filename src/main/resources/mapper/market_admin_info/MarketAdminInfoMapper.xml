@@ -10,7 +10,7 @@
 
     <!--根据MarketId查询市场管理员信息-->
     <select id="findMarketAdminInfoByMarketId" resultType="MarketAdminInfo">
-        select * from market_admin_info where marketId
+        select * from market_admin_info where market_id=#{marketId}
     </select>
 
     <!--插入信息-->
