@@ -10,9 +10,7 @@ import com.order.take_out.service.market.ModifyMarketService;
 import com.order.take_out.service.market.SelectMarketService;
 import com.order.take_out.tools_homemade.JsonOut;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -73,5 +71,12 @@ public class ModifyMarketController {
         }else {
             return JsonOut.print("失败",JsonOut.FALSE);
         }
+    }
+
+    @RequestMapping(value = "/modifyMarketDetailedInfo", method= RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> modifyMarketDetailedInfo(@RequestBody Map<String,Object> map){
+        boolean result=modifyMarketService.modifyMarketDetailedInfo(map);
+        return JsonOut.print("成功",JsonOut.TRUE);
     }
 }

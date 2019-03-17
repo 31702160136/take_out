@@ -43,4 +43,11 @@ public class SelectMarketController {
         return JsonOut.print(list,JsonOut.TRUE);
     }
 
+    @RequestMapping("/getDetailedInfo")
+    @ResponseBody
+    public Map<String,Object> getDetailedInfo(Integer id){
+        System.out.println(id);
+        Map<String,Object> map=selectMarketService.getDetailedInfo(id);
+        return JsonOut.print(map,JsonOut.TRUE);
+    }
 }

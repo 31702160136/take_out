@@ -35,7 +35,7 @@
             <if test="modificationTime!=null">`modification_time`=#{modificationTime}, </if>
         </set>
         WHERE
-        id=#{id};
+        id=#{id} or market_id = #{marketId};
     </update>
 
     <!--删除信息-->

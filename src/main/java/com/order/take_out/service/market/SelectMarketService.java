@@ -42,4 +42,11 @@ public interface SelectMarketService {
      * @return
      */
     public MarketAdminInfo getMarketAdminInfo(Integer marketId);
+
+    /**
+     * 查看市场详细信息
+     * @param marketId
+     * @return
+     */
+    public Map<String,Object> getDetailedInfo(Integer marketId);
 }

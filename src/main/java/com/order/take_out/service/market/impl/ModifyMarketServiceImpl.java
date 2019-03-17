@@ -1,18 +1,14 @@
 package com.order.take_out.service.market.impl;
 
-import com.order.take_out.dao.MarketAdminInfoDao;
-import com.order.take_out.dao.MarketDao;
-import com.order.take_out.dao.MarketPasswordDao;
-import com.order.take_out.dao.ServiceInfoDao;
-import com.order.take_out.pojo.market.Market;
-import com.order.take_out.pojo.market.MarketAdminInfo;
-import com.order.take_out.pojo.market.MarketPassword;
-import com.order.take_out.pojo.market.ServiceInfo;
+import com.order.take_out.dao.*;
+import com.order.take_out.pojo.market.*;
 import com.order.take_out.service.market.ModifyMarketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @program: take_out
@@ -29,6 +25,8 @@ public class ModifyMarketServiceImpl implements ModifyMarketService {
     MarketAdminInfoDao marketAdminInfoDao;
     @Autowired
     ServiceInfoDao serviceInfoDao;
+    @Autowired
+    MarketUserDao marketUserDao;
     @Autowired
     MarketPasswordDao marketPasswordDao;
 
@@ -134,6 +132,74 @@ public class ModifyMarketServiceImpl implements ModifyMarketService {
             }
         }else {
             throw new RuntimeException("旧密码不一致!");
+        }
+    }
+
+    @Transactional
+    @Override
+    public Boolean modifyMarketDetailedInfo(Map<String, Object> map) {
+        try {
+            System.out.println(map.get("id"));
+            if (map.get("id")!=null){
+                //创建市场对象保存信息
+                Market market=new Market();
+                market.setId((Integer) map.get("id"));
+                market.setName(String.valueOf(map.get("marketName")));
+                market.setAddress(String.valueOf(map.get("marketAddress")));
+                market.setModificationTime(new Date());
+                //修改市场信息
+                int marketRes=marketDao.modify(market);
+                if (!(marketRes>0)){
+                    throw new RuntimeException("修改市场信息失败!");
+                }
+                //创建市场管理员对象保存信息
+                MarketAdminInfo marketAdminInfo=new MarketAdminInfo();
+                marketAdminInfo.setMarketId(market.getId());
+                marketAdminInfo.setName(String.valueOf(map.get("adminName")));
+                //判断性别0男1女
+                int iGender=0;
+                if(map.get("adminGender").equals("男")){
+                    iGender = 0;
+                }else if(map.get("adminGender").equals("女")){
+                    iGender = 1;
+                }else{
+                    throw new RuntimeException("市场管理员性别信息有误");
+                }
+                marketAdminInfo.setGender(iGender);
+                marketAdminInfo.setPhone(String.valueOf(map.get("adminPhone")));
+                marketAdminInfo.setAddress(String.valueOf(map.get("adminAddress")));
+                marketAdminInfo.setModificationTime(new Date());
+                //修改市场管理员信息
+                int marketAdminInfoRes=marketAdminInfoDao.modify(marketAdminInfo);
+                if (!(marketAdminInfoRes>0)){
+                    throw new RuntimeException("修改市场管理员信息失败");
+                }
+                //创建市场管理员账号对象保存信息
+                MarketUser marketUser=new MarketUser();
+                marketUser.setMarketId(market.getId());
+                marketUser.setUsername(String.valueOf(map.get("username")));
+                marketUser.setModificationTime(new Date());
+                //修改市场管理员账号
+                int marketUserRes=marketUserDao.modify(marketUser);
+                if (!(marketUserRes>0)){
+                    throw new RuntimeException("修改市场管理员账号失败");
+                }
+                //创建市场管理员密码对象保存信息
+                MarketPassword marketPassword=new MarketPassword();
+                marketPassword.setMarketUserId(marketUser.getId());
+                marketPassword.setPassword(String.valueOf(map.get("password")));
+                marketPassword.setModificationTime(new Date());
+                //修改市场管理员密码
+                int marketPasswordRes=marketPasswordDao.modify(marketPassword);
+                if (!(marketPasswordRes>0)){
+                    throw new RuntimeException("修改市场管理员密码失败");
+                }
+                return true;
+            }else {
+                throw new RuntimeException("缺少必要信息");
+            }
+        }catch (RuntimeException e){
+            throw new RuntimeException("修改失败!"+e);
         }
     }
 }

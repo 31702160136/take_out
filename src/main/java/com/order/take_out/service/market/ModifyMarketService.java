@@ -4,6 +4,8 @@ import com.order.take_out.pojo.market.Market;
 import com.order.take_out.pojo.market.MarketAdminInfo;
 import com.order.take_out.pojo.market.ServiceInfo;
 
+import java.util.Map;
+
 public interface ModifyMarketService {
     /**
      * 修改市场信息
@@ -34,4 +36,6 @@ public interface ModifyMarketService {
      * @return
      */
     public Boolean modifyMarketPassword(String password,String oldPassword,Integer marketUserId);
+
+    public Boolean modifyMarketDetailedInfo(Map<String,Object> map);
 }

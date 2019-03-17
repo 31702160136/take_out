@@ -28,6 +28,13 @@
 
     <!--更新信息-->
     <update id="modify" useGeneratedKeys="true" keyProperty="id">
+--         返回受影响的行主键
+        <selectKey keyProperty='id' resultType='int' order='BEFORE'>
+            SELECT
+            (select id FROM `order`.`market_user` WHERE
+            market_id = #{marketId})id
+            from DUAL
+        </selectKey>
         UPDATE `order`.`market_user`
         <set>
             <if test="username!=null and username!=''">`username`=#{username}, </if>
@@ -35,7 +42,7 @@
             <if test="creationTime!=null">`creation_time`=#{creationTime}, </if>
             <if test="modificationTime!=null">`modification_time`=#{modificationTime} </if>
         </set>
-        WHERE id=#{id};
+        WHERE id=#{id} or market_id = #{marketId};;
     </update>
 
     <!--删除信息-->
